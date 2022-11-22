@@ -1,5 +1,6 @@
 const file = require('fs');
  let students = [];
+ let BSD = [];
 
 module.exports.init = function() {
 
@@ -20,10 +21,34 @@ module.exports.init = function() {
 module.exports.getBSD = function() {
 
     return new Promise((resolve , reject) => {
-        
-        resolve(students);
+      var j = 0;
+        for(var i=0;i<students.length;i++)
+        {
+          if(students[i].program == "BSD")
+          {
+            BSD[j] = students[i];
+            j++;
+          }
+        }
+        resolve(BSD);
         
     });
+
+}
+
+module.exports.allStudents = function() {
+
+  return new Promise((resolve , reject) => {
+   
+    if(students.length == 0)
+    {
+      reject("no results returned");
+    }
+    else
+      resolve(students);
+
+      
+  });
 
 }
 
@@ -44,7 +69,7 @@ module.exports.highGPA = function() {
             }
            
         }
-         resolve(students[index]);
+          resolve(students[index]);
        
          });
 }
